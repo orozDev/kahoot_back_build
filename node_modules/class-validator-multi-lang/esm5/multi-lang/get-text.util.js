@@ -1,0 +1,6 @@
+import { getClassValidatorMessage } from './messages.storage';
+var CLASS_VALIDATOR_MESSAGE_MARKER = '__I18N__';
+export function getText(s) {
+    return getClassValidatorMessage(s) ? [CLASS_VALIDATOR_MESSAGE_MARKER, s, CLASS_VALIDATOR_MESSAGE_MARKER].join('') : s;
+}
+//# sourceMappingURL=get-text.util.js.map
