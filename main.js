@@ -23,6 +23,7 @@ async function bootstrap() {
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, swagger);
     swagger_1.SwaggerModule.setup('/api/v1/swagger', app, document);
+    app.enableCors();
     const PORT = config.get('PORT') || 8000;
     await app.listen(PORT, () => console.log(`The server has been started on ${PORT} port`));
 }
