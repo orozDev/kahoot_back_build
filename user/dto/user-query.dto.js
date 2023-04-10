@@ -18,11 +18,15 @@ class UserQueryDto {
 }
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 20, required: false }),
+    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
+    (0, class_validator_1.IsInt)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], UserQueryDto.prototype, "limit", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 1, required: false }),
+    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
+    (0, class_validator_1.IsInt)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], UserQueryDto.prototype, "offset", void 0);

@@ -26,39 +26,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
 const bcryptjs = require("bcryptjs");
 const user_entity_1 = require("./user.entity");
 const files_service_1 = require("../files/files.service");
 const utils_service_1 = require("../utils/utils.service");
+const typeorm_2 = require("typeorm");
 let UserService = class UserService {
     constructor(userRepository, filesService, utils) {
         this.userRepository = userRepository;
         this.filesService = filesService;
         this.utils = utils;
     }
-    async getAll(queryDto) {
+    async getAll(queryDto, orderBy = 'id', order = 'DESC') {
         const { limit, offset, search } = queryDto, rest = __rest(queryDto, ["limit", "offset", "search"]);
-        let queryBuilder = await this.userRepository.createQueryBuilder('user');
-        if (!!search) {
-            queryBuilder = await queryBuilder
-                .orWhere({ firstName: (0, typeorm_2.Like)(search) })
-                .orWhere({ lastName: (0, typeorm_2.Like)(search) })
-                .orWhere({ email: (0, typeorm_2.Like)(search) })
-                .orWhere({ phone: (0, typeorm_2.Like)(search) });
-        }
-        const totalCount = await queryBuilder.where(rest).getCount();
-        const take = limit || 10;
-        const page = offset || 1;
-        const skip = (page - 1) * take;
-        const users = await queryBuilder.skip(skip).take(take).getMany();
-        return {
-            totalCount,
+        return await this.utils.complexRequest({
+            entity: 'user',
+            repository: this.userRepository,
+            limit,
             offset,
-            limit: limit,
-            totalPages: Math.ceil(totalCount / limit),
-            data: this.utils.includesUrl(users, ['avatar']),
-        };
+            filterQuery: rest,
+            search,
+            orderBy,
+            order,
+            searchFields: ['first_name', 'last_name', 'email', 'phone'],
+            includeStaticPrefix: ['avatar'],
+        });
     }
     async create(dto, avatar = null) {
         let avatarPath = null;
@@ -76,20 +68,24 @@ let UserService = class UserService {
     async getOne(id) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user)
-            throw new common_1.NotFoundException({ message: 'User not found' });
+            throw new common_1.NotFoundException({ message: 'UserEntity not found' });
         return this.utils.includeUrl(user, ['avatar']);
     }
     async delete(id) {
         await this.userRepository.delete(id);
     }
-    async update(id, dto) {
-        if (!!(dto === null || dto === void 0 ? void 0 : dto.password)) {
-            const password = await this.makePassword(dto.password);
-            await this.userRepository.update({ id }, Object.assign(Object.assign({}, dto), { password }));
+    async update(id, dto, avatar = null) {
+        const user = await this.userRepository.findOne({ where: { id } });
+        const temp = {};
+        if (avatar) {
+            if (user.avatar)
+                this.filesService.removeFile(user.avatar);
+            temp['avatar'] = this.filesService.createFile('user_avatars', avatar);
         }
-        else {
-            await this.userRepository.update({ id }, dto);
+        if (dto.password) {
+            temp['password'] = await this.makePassword(dto.password);
         }
+        await this.userRepository.update({ id }, Object.assign(Object.assign({}, dto), temp));
         return await this.getOne(id);
     }
     async getByUsernameWithPassword(username) {
@@ -108,15 +104,16 @@ let UserService = class UserService {
                 'lastName',
             ],
         });
-        console.log(user);
         if (!user)
-            throw new common_1.NotFoundException({ message: 'User not found' });
+            throw new common_1.NotFoundException({
+                message: ['Не существует пользователя или неверный пароль'],
+            });
         return this.utils.includeUrl(user, ['avatar']);
     }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.UserEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         files_service_1.FilesService,
         utils_service_1.UtilsService])

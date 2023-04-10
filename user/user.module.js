@@ -21,7 +21,7 @@ let UserModule = class UserModule {
 UserModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.UserEntity]),
             (0, common_1.forwardRef)(() => auth_module_1.AuthModule),
             files_module_1.FilesModule,
             config_1.ConfigModule,

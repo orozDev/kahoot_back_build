@@ -34,6 +34,47 @@ let UtilsService = class UtilsService {
         });
         return data;
     }
+    pagianate(queryBuilder, limit = 20, offset = 1) {
+        const take = limit || 20;
+        const page = offset || 1;
+        const skip = (page - 1) * take;
+        return queryBuilder.take(take).skip(skip);
+    }
+    search(queryBuilder, fields, value) {
+        for (const field of fields) {
+            queryBuilder.orWhere(`(user.${field} LIKE :search)`, {
+                search: `%${value}%`,
+            });
+        }
+        return queryBuilder;
+    }
+    async complexRequest(options) {
+        const queryBuilder = await options.repository.createQueryBuilder(options.entity);
+        if (options.search) {
+            for (const field of options.searchFields) {
+                queryBuilder.orWhere(`(user.${field} LIKE :search)`, {
+                    search: `%${options.search}%`,
+                });
+            }
+        }
+        const take = options.limit || 30;
+        const page = options.offset || 1;
+        const skip = (page - 1) * take;
+        queryBuilder
+            .where(options.filterQuery)
+            .take(take)
+            .skip(skip)
+            .orderBy(options.orderBy || 'id', options.order || 'DESC');
+        const totalCount = await queryBuilder.getCount();
+        const results = await queryBuilder.getMany();
+        return {
+            totalCount,
+            offset: page,
+            limit: take,
+            totalPages: Math.ceil(totalCount / take),
+            data: this.includesUrl(results, options.includeStaticPrefix || []),
+        };
+    }
 };
 UtilsService = __decorate([
     (0, common_1.Injectable)(),

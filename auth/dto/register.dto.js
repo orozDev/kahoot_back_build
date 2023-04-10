@@ -20,7 +20,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'user' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.User, column: 'username' }], {
+    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.UserEntity, column: 'username' }], {
         message: 'Такое имя пользователя уже занято',
     }),
     (0, class_validator_1.IsNotEmpty)(),
@@ -46,7 +46,7 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsPhoneNumber)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.User, column: 'phone' }], {
+    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.UserEntity, column: 'phone' }], {
         message: 'Пользователь с таким номером телефона уже существует',
     }),
     __metadata("design:type", String)
@@ -56,7 +56,7 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsEmail)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.User, column: 'email' }], {
+    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.UserEntity, column: 'email' }], {
         message: 'Пользователь с таким электронной почтой уже существует',
     }),
     __metadata("design:type", String)

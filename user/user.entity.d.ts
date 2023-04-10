@@ -1,6 +1,6 @@
 import { UserRolesEnum } from './user-roles.enum';
-export declare class User {
-    id: number;
+import { BaseEntity } from '../options/base-entity.options';
+export declare class UserEntity extends BaseEntity {
     avatar: string;
     username: string;
     password: string;

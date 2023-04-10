@@ -38,8 +38,8 @@ let UserController = class UserController {
     getOne(id) {
         return this.userService.getOne(id);
     }
-    update(id, dto) {
-        return this.userService.update(id, dto);
+    update(id, dto, avatar = null) {
+        return this.userService.update(id, dto, avatar);
     }
     async delete(id) {
         await this.userService.delete(id);
@@ -81,13 +81,21 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getOne", null);
 __decorate([
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
     (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
     (0, common_1.Patch)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
+        validators: [
+            new common_1.MaxFileSizeValidator({ maxSize: 3000000 }),
+            new common_1.FileTypeValidator({ fileType: 'image/*' }),
+        ],
+        fileIsRequired: false,
+    }))),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [Number, update_user_dto_1.UpdateUserDto, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "update", null);
 __decorate([

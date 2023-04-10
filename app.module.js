@@ -14,7 +14,7 @@ const serve_static_1 = require("@nestjs/serve-static");
 const typeorm_1 = require("@nestjs/typeorm");
 const path_1 = require("path");
 const utils_module_1 = require("./utils/utils.module");
-const typeorm_options_1 = require("./utils/typeorm.options");
+const typeorm_options_1 = require("./options/typeorm.options");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([

@@ -34,12 +34,14 @@ const user_service_1 = require("../user/user.service");
 const user_roles_enum_1 = require("../user/user-roles.enum");
 const config_1 = require("@nestjs/config");
 const files_service_1 = require("../files/files.service");
+const utils_service_1 = require("../utils/utils.service");
 let AuthService = class AuthService {
-    constructor(userService, jwtService, config, filesService, userRepository) {
+    constructor(userService, jwtService, config, filesService, utitls, userRepository) {
         this.userService = userService;
         this.jwtService = jwtService;
         this.config = config;
         this.filesService = filesService;
+        this.utitls = utitls;
         this.userRepository = userRepository;
     }
     async validateUser(username, password) {
@@ -102,8 +104,11 @@ let AuthService = class AuthService {
         return await this.userService.getOne(id);
     }
     async register(dto, avatar) {
-        const user = await this.userService.create(Object.assign(Object.assign({}, dto), { isActive: false, role: user_roles_enum_1.UserRolesEnum.USER }), avatar);
-        return this.login(user);
+        const user = await this.userService.create(Object.assign(Object.assign({}, dto), { isActive: true, role: user_roles_enum_1.UserRolesEnum.USER }), avatar);
+        const includedUrlUser = this.utitls.includeUrl(user, [
+            'avatar',
+        ]);
+        return this.login(includedUrlUser);
     }
     async changePassword(id, dto) {
         const user = await this.userService.getOne(id);
@@ -148,11 +153,12 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(4, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
+    __param(5, (0, typeorm_2.InjectRepository)(user_entity_1.UserEntity)),
     __metadata("design:paramtypes", [user_service_1.UserService,
         jwt_1.JwtService,
         config_1.ConfigService,
         files_service_1.FilesService,
+        utils_service_1.UtilsService,
         typeorm_1.Repository])
 ], AuthService);
 exports.AuthService = AuthService;

@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateUserDto = void 0;
 const class_validator_1 = require("class-validator");
-const unique_validator_1 = require("../../validators/unique.validator");
-const user_entity_1 = require("../user.entity");
 const user_roles_enum_1 = require("../user-roles.enum");
 const class_transformer_1 = require("class-transformer");
 const swagger_1 = require("@nestjs/swagger");
@@ -22,9 +20,6 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'user' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.User, column: 'username' }], {
-        message: 'Такое имя пользователя уже занято',
-    }),
     (0, class_validator_1.MinLength)(2),
     (0, class_validator_1.MaxLength)(50),
     __metadata("design:type", String)
@@ -47,9 +42,6 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsPhoneNumber)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.User, column: 'phone' }], {
-        message: 'Пользователь с таким номером телефона уже существует',
-    }),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "phone", void 0);
 __decorate([
@@ -57,9 +49,6 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsEmail)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.User, column: 'email' }], {
-        message: 'Пользователь с таким электронной почтой уже существует',
-    }),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "email", void 0);
 __decorate([

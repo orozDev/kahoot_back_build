@@ -4,9 +4,10 @@ const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const config_1 = require("@nestjs/config");
 const class_validator_1 = require("class-validator");
-const validation_pipe_options_1 = require("./utils/validation-pipe.options");
+const validation_pipe_options_1 = require("./options/validation-pipe.options");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
+const catch_error_options_1 = require("./options/catch-error.options");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const PREFIX = '/api/v1';
@@ -23,6 +24,8 @@ async function bootstrap() {
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, swagger);
     swagger_1.SwaggerModule.setup('/api/v1/swagger', app, document);
+    const { httpAdapter } = app.get(core_1.HttpAdapterHost);
+    app.useGlobalFilters(new catch_error_options_1.QueryErrorFilter(httpAdapter));
     app.enableCors();
     const PORT = config.get('PORT') || 8000;
     await app.listen(PORT, () => console.log(`The server has been started on ${PORT} port`));

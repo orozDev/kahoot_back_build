@@ -9,47 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.UserEntity = void 0;
 const user_roles_enum_1 = require("./user-roles.enum");
 const typeorm_1 = require("typeorm");
-let User = class User {
+const base_entity_options_1 = require("../options/base-entity.options");
+let UserEntity = class UserEntity extends base_entity_options_1.BaseEntity {
 };
-__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], User.prototype, "avatar", void 0);
+], UserEntity.prototype, "avatar", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
+], UserEntity.prototype, "username", void 0);
 __decorate([
     (0, typeorm_1.Column)({ select: false }),
     __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], UserEntity.prototype, "password", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], User.prototype, "phone", void 0);
+], UserEntity.prototype, "phone", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], UserEntity.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ name: 'first_name' }),
     __metadata("design:type", String)
-], User.prototype, "firstName", void 0);
+], UserEntity.prototype, "firstName", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ name: 'last_name' }),
     __metadata("design:type", String)
-], User.prototype, "lastName", void 0);
+], UserEntity.prototype, "lastName", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: true }),
+    (0, typeorm_1.Column)({ default: true, name: 'is_active' }),
     __metadata("design:type", Boolean)
-], User.prototype, "isActive", void 0);
+], UserEntity.prototype, "isActive", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'enum',
@@ -57,9 +54,9 @@ __decorate([
         default: user_roles_enum_1.UserRolesEnum.USER,
     }),
     __metadata("design:type", String)
-], User.prototype, "role", void 0);
-User = __decorate([
-    (0, typeorm_1.Entity)()
-], User);
-exports.User = User;
+], UserEntity.prototype, "role", void 0);
+UserEntity = __decorate([
+    (0, typeorm_1.Entity)('user')
+], UserEntity);
+exports.UserEntity = UserEntity;
 //# sourceMappingURL=user.entity.js.map

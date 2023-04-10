@@ -36,7 +36,7 @@ AuthModule = __decorate([
             config_1.ConfigModule,
             utils_module_1.UtilsModule,
             validator_module_1.ValidatorModule,
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.UserEntity]),
             jwt_1.JwtModule.registerAsync({
                 imports: [config_1.ConfigModule],
                 inject: [config_1.ConfigService],
