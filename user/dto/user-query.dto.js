@@ -14,22 +14,9 @@ const class_validator_1 = require("class-validator");
 const user_roles_enum_1 = require("../user-roles.enum");
 const class_transformer_1 = require("class-transformer");
 const swagger_1 = require("@nestjs/swagger");
-class UserQueryDto {
+const paginationQueryDto_1 = require("../../utils/dto/paginationQueryDto");
+class UserQueryDto extends paginationQueryDto_1.PaginationQueryDto {
 }
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 20, required: false }),
-    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Number)
-], UserQueryDto.prototype, "limit", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 1, required: false }),
-    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Number)
-], UserQueryDto.prototype, "offset", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: user_roles_enum_1.UserRolesEnum.USER,

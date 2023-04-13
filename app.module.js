@@ -15,6 +15,11 @@ const typeorm_1 = require("@nestjs/typeorm");
 const path_1 = require("path");
 const utils_module_1 = require("./utils/utils.module");
 const typeorm_options_1 = require("./options/typeorm.options");
+const quiz_module_1 = require("./quiz/quiz.module");
+const klass_module_1 = require("./klass/klass.module");
+const category_module_1 = require("./category/category.module");
+const admin_module_1 = require("./admin/admin.module");
+const nestjs_form_data_1 = require("nestjs-form-data");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -28,8 +33,13 @@ AppModule = __decorate([
                 serveRoot: '/static',
             }),
             typeorm_1.TypeOrmModule.forRootAsync(typeorm_options_1.typeormOptions),
+            nestjs_form_data_1.NestjsFormDataModule,
             user_module_1.UserModule,
             utils_module_1.UtilsModule,
+            quiz_module_1.QuizModule,
+            klass_module_1.KlassModule,
+            category_module_1.CategoryModule,
+            admin_module_1.AdminModule,
         ],
     })
 ], AppModule);

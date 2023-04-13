@@ -5,6 +5,6 @@ var UserRolesEnum;
 (function (UserRolesEnum) {
     UserRolesEnum["ADMIN"] = "admin";
     UserRolesEnum["USER"] = "user";
-    UserRolesEnum["STAFF"] = "staff";
+    UserRolesEnum["TEACHER"] = "teacher";
 })(UserRolesEnum = exports.UserRolesEnum || (exports.UserRolesEnum = {}));
 //# sourceMappingURL=user-roles.enum.js.map

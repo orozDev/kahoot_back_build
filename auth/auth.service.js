@@ -29,11 +29,11 @@ const bcryptjs = require("bcryptjs");
 const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
-const user_entity_1 = require("../user/user.entity");
+const user_entity_1 = require("../user/entities/user.entity");
 const user_service_1 = require("../user/user.service");
 const user_roles_enum_1 = require("../user/user-roles.enum");
 const config_1 = require("@nestjs/config");
-const files_service_1 = require("../files/files.service");
+const file_service_1 = require("../files/file.service");
 const utils_service_1 = require("../utils/utils.service");
 let AuthService = class AuthService {
     constructor(userService, jwtService, config, filesService, utitls, userRepository) {
@@ -101,7 +101,7 @@ let AuthService = class AuthService {
         };
     }
     async profile(id) {
-        return await this.userService.getOne(id);
+        return await this.userService.findOne(id);
     }
     async register(dto, avatar) {
         const user = await this.userService.create(Object.assign(Object.assign({}, dto), { isActive: true, role: user_roles_enum_1.UserRolesEnum.USER }), avatar);
@@ -111,7 +111,7 @@ let AuthService = class AuthService {
         return this.login(includedUrlUser);
     }
     async changePassword(id, dto) {
-        const user = await this.userService.getOne(id);
+        const user = await this.userService.findOne(id);
         if (!user) {
             return {
                 isChanged: false,
@@ -137,7 +137,7 @@ let AuthService = class AuthService {
         };
     }
     async changeProfile(id, dto, avatar = null) {
-        const user = await this.userService.getOne(id);
+        const user = await this.userService.findOne(id);
         if (avatar) {
             if (user.avatar)
                 this.filesService.removeFile(user.avatar);
@@ -147,7 +147,7 @@ let AuthService = class AuthService {
         else {
             await this.userRepository.update({ id }, dto);
         }
-        const updatedUser = await this.userService.getOne(id);
+        const updatedUser = await this.userService.findOne(id);
         return this.login(updatedUser);
     }
 };
@@ -157,7 +157,7 @@ AuthService = __decorate([
     __metadata("design:paramtypes", [user_service_1.UserService,
         jwt_1.JwtService,
         config_1.ConfigService,
-        files_service_1.FilesService,
+        file_service_1.FileService,
         utils_service_1.UtilsService,
         typeorm_1.Repository])
 ], AuthService);

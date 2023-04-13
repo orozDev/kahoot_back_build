@@ -1,11 +1,11 @@
 import { UserRolesEnum } from '../user-roles.enum';
 export declare class UpdateUserDto {
-    readonly username: string;
-    readonly password: string;
-    readonly phone: string;
-    readonly email: string;
-    readonly firstName: string;
-    readonly lastName: string;
-    readonly isActive: boolean;
-    readonly role: UserRolesEnum;
+    username: string;
+    password: string;
+    phone: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    isActive: boolean;
+    role: UserRolesEnum;
 }

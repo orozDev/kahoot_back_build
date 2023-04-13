@@ -1,8 +1,8 @@
 export declare class ChangeProfileDto {
-    readonly username: string;
-    readonly password: string;
-    readonly phone: string;
-    readonly email: string;
-    readonly firstName: string;
-    readonly lastName: string;
+    username: string;
+    password: string;
+    phone: string;
+    email: string;
+    firstName: string;
+    lastName: string;
 }

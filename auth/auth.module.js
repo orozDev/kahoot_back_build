@@ -18,8 +18,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const jwt_strategy_1 = require("./jwt.strategy");
 const user_service_1 = require("../user/user.service");
 const user_module_1 = require("../user/user.module");
-const user_entity_1 = require("../user/user.entity");
-const files_module_1 = require("../files/files.module");
+const user_entity_1 = require("../user/entities/user.entity");
+const file_module_1 = require("../files/file.module");
 const rt_strategy_1 = require("./rt.strategy");
 const utils_module_1 = require("../utils/utils.module");
 const validator_module_1 = require("../validators/validator.module");
@@ -31,7 +31,7 @@ AuthModule = __decorate([
         controllers: [auth_controller_1.AuthController],
         imports: [
             passport_1.PassportModule,
-            files_module_1.FilesModule,
+            file_module_1.FileModule,
             (0, common_1.forwardRef)(() => user_module_1.UserModule),
             config_1.ConfigModule,
             utils_module_1.UtilsModule,

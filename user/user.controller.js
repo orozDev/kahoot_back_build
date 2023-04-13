@@ -29,20 +29,23 @@ let UserController = class UserController {
         this.userService = userService;
         this.config = config;
     }
-    getAll(queryDto) {
-        return this.userService.getAll(queryDto);
+    findAll(queryDto) {
+        return this.userService.findAll(queryDto);
     }
     create(dto, avatar = null) {
         return this.userService.create(dto, avatar);
     }
-    getOne(id) {
-        return this.userService.getOne(id);
+    findOne(id) {
+        const user = this.userService.findOne(+id);
+        if (!user)
+            throw new common_1.NotFoundException({ message: 'User not found' });
+        return user;
     }
     update(id, dto, avatar = null) {
-        return this.userService.update(id, dto, avatar);
+        return this.userService.update(+id, dto, avatar);
     }
-    async delete(id) {
-        await this.userService.delete(id);
+    async remove(id) {
+        await this.userService.remove(+id);
     }
 };
 __decorate([
@@ -53,7 +56,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_query_dto_1.UserQueryDto]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "getAll", null);
+], UserController.prototype, "findAll", null);
 __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
@@ -79,7 +82,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "getOne", null);
+], UserController.prototype, "findOne", null);
 __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
@@ -107,7 +110,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "delete", null);
+], UserController.prototype, "remove", null);
 UserController = __decorate([
     (0, swagger_1.ApiTags)('users'),
     (0, swagger_1.ApiBearerAuth)(),

@@ -10,7 +10,7 @@ declare const RtGuard_base: import("@nestjs/passport").Type<import("@nestjs/pass
 export declare class RtGuard extends RtGuard_base {
 }
 export declare class RoleAuthGuard extends JwtAuthGuard {
-    private readonly reflector;
+    private reflector;
     constructor(reflector: Reflector);
     canActivate(context: ExecutionContext): Promise<any>;
 }

@@ -31,8 +31,7 @@ let RtStrategy = class RtStrategy extends (0, passport_1.PassportStrategy)(passp
 };
 RtStrategy = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [config_1.ConfigService,
-        auth_service_1.AuthService])
+    __metadata("design:paramtypes", [config_1.ConfigService, auth_service_1.AuthService])
 ], RtStrategy);
 exports.RtStrategy = RtStrategy;
 //# sourceMappingURL=rt.strategy.js.map

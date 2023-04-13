@@ -27,8 +27,8 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const bcryptjs = require("bcryptjs");
-const user_entity_1 = require("./user.entity");
-const files_service_1 = require("../files/files.service");
+const user_entity_1 = require("./entities/user.entity");
+const file_service_1 = require("../files/file.service");
 const utils_service_1 = require("../utils/utils.service");
 const typeorm_2 = require("typeorm");
 let UserService = class UserService {
@@ -37,7 +37,7 @@ let UserService = class UserService {
         this.filesService = filesService;
         this.utils = utils;
     }
-    async getAll(queryDto, orderBy = 'id', order = 'DESC') {
+    async findAll(queryDto, orderBy = 'id', order = 'DESC') {
         const { limit, offset, search } = queryDto, rest = __rest(queryDto, ["limit", "offset", "search"]);
         return await this.utils.complexRequest({
             entity: 'user',
@@ -65,17 +65,20 @@ let UserService = class UserService {
     async makePassword(password) {
         return await bcryptjs.hash(password, 10);
     }
-    async getOne(id) {
+    async findOne(id) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user)
             throw new common_1.NotFoundException({ message: 'UserEntity not found' });
         return this.utils.includeUrl(user, ['avatar']);
     }
-    async delete(id) {
+    async remove(id) {
+        await this.findOne(id);
         await this.userRepository.delete(id);
     }
     async update(id, dto, avatar = null) {
         const user = await this.userRepository.findOne({ where: { id } });
+        if (!user)
+            throw new common_1.NotFoundException({ message: 'User not found' });
         const temp = {};
         if (avatar) {
             if (user.avatar)
@@ -86,7 +89,7 @@ let UserService = class UserService {
             temp['password'] = await this.makePassword(dto.password);
         }
         await this.userRepository.update({ id }, Object.assign(Object.assign({}, dto), temp));
-        return await this.getOne(id);
+        return await this.findOne(id);
     }
     async getByUsernameWithPassword(username) {
         let user = null;
@@ -115,7 +118,7 @@ UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.UserEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
-        files_service_1.FilesService,
+        file_service_1.FileService,
         utils_service_1.UtilsService])
 ], UserService);
 exports.UserService = UserService;

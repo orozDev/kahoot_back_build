@@ -1,7 +1,6 @@
 import { UserRolesEnum } from '../user-roles.enum';
-export declare class UserQueryDto {
-    limit: number;
-    offset: number;
+import { PaginationQueryDto } from '../../utils/dto/paginationQueryDto';
+export declare class UserQueryDto extends PaginationQueryDto {
     role: UserRolesEnum;
     isActive: boolean;
     search: string;

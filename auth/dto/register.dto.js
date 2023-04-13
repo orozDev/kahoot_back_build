@@ -11,26 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterDto = void 0;
 const class_validator_1 = require("class-validator");
-const user_entity_1 = require("../../user/user.entity");
+const user_entity_1 = require("../../user/entities/user.entity");
 const unique_validator_1 = require("../../validators/unique.validator");
 const swagger_1 = require("@nestjs/swagger");
 class RegisterDto {
 }
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'user' }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.UserEntity, column: 'username' }], {
         message: 'Такое имя пользователя уже занято',
     }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MinLength)(2),
     (0, class_validator_1.MaxLength)(50),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "username", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: '**********' }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsStrongPassword)({
         minLength: 8,
@@ -43,7 +40,6 @@ __decorate([
 ], RegisterDto.prototype, "password", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: '+996776780243' }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsPhoneNumber)(),
     (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.UserEntity, column: 'phone' }], {
@@ -53,7 +49,6 @@ __decorate([
 ], RegisterDto.prototype, "phone", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'oroz@gmail.com' }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: user_entity_1.UserEntity, column: 'email' }], {
@@ -63,7 +58,6 @@ __decorate([
 ], RegisterDto.prototype, "email", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Orozbek' }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(2),
     (0, class_validator_1.MaxLength)(50),
@@ -71,7 +65,6 @@ __decorate([
 ], RegisterDto.prototype, "firstName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'Zhenishbek uulu' }),
-    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(2),
     (0, class_validator_1.MaxLength)(50),

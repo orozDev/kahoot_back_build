@@ -4,12 +4,12 @@ import { LoginDto } from './dto/login.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { ChangeProfileDto } from './dto/change-profile.dto';
 import { RegisterDto } from './dto/register.dto';
-import { UserEntity } from '../user/user.entity';
+import { UserEntity } from '../user/entities/user.entity';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { LoginResponseInterface } from './interfaces/register-response.interface';
 import { IFullToken } from './interfaces/token.interface';
 export declare class AuthController {
-    private readonly authService;
+    private authService;
     constructor(authService: AuthService);
     login(loginDto: LoginDto, request: any): LoginResponseInterface;
     profile(request: any): Promise<UserEntity>;

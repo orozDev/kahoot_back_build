@@ -1,0 +1,1 @@
+{"version":3,"file":"answer.admin.js","sourceRoot":"","sources":["../../../src/admin/resources/answer.admin.ts"],"names":[],"mappings":";;;AAAA,qEAAiE;AAEpD,QAAA,kBAAkB,GAAG;IAChC,QAAQ,EAAE,4BAAY;IACtB,OAAO,EAAE;QACP,cAAc,EAAE,CAAC,IAAI,EAAE,aAAa,EAAE,OAAO,EAAE,WAAW,CAAC;KAC5D;CACF,CAAC"}

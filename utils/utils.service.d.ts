@@ -3,7 +3,7 @@ import { SelectQueryBuilder } from 'typeorm/query-builder/SelectQueryBuilder';
 import { IComplexRequest } from './interfaces/complex-request.interface';
 import { IComplexRequestOptions } from './interfaces/complex-request-options.interface';
 export declare class UtilsService {
-    private readonly config;
+    private config;
     constructor(config: ConfigService);
     includesUrl<Type>(data: Type[], fields: string[]): Type[];
     includeUrl<Type>(data: Type, fields: string[]): Type;

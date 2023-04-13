@@ -49,6 +49,7 @@ let UtilsService = class UtilsService {
         return queryBuilder;
     }
     async complexRequest(options) {
+        var _a;
         const queryBuilder = await options.repository.createQueryBuilder(options.entity);
         if (options.search) {
             for (const field of options.searchFields) {
@@ -57,21 +58,23 @@ let UtilsService = class UtilsService {
                 });
             }
         }
-        const take = options.limit || 30;
-        const page = options.offset || 1;
-        const skip = (page - 1) * take;
-        queryBuilder
-            .where(options.filterQuery)
-            .take(take)
-            .skip(skip)
-            .orderBy(options.orderBy || 'id', options.order || 'DESC');
+        queryBuilder.where(options.filterQuery || {});
+        let take = 0;
+        let page = 0;
+        if (options.limit) {
+            take = options.limit;
+            page = options.offset || 1;
+            const skip = (page - 1) * take;
+            queryBuilder.take(take).skip(skip);
+        }
+        queryBuilder.orderBy(options.orderBy || 'id', options.order || 'DESC');
         const totalCount = await queryBuilder.getCount();
         const results = await queryBuilder.getMany();
         return {
             totalCount,
             offset: page,
             limit: take,
-            totalPages: Math.ceil(totalCount / take),
+            totalPages: (_a = Math.ceil(totalCount / take)) !== null && _a !== void 0 ? _a : 0,
             data: this.includesUrl(results, options.includeStaticPrefix || []),
         };
     }
