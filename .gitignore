@@ -1,3 +1,4 @@
 static
 migrations
 .env
+.DS_Store
