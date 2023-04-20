@@ -41,8 +41,8 @@ let KlassService = class KlassService {
         return await this.findOne(id);
     }
     async remove(id) {
-        await this.findOne(id);
-        await this.klassRepository.delete({ id });
+        const klass = await this.findOne(id);
+        await klass.remove();
     }
 };
 KlassService = __decorate([

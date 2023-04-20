@@ -27,13 +27,15 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./dto/login.dto");
-const auth_guards_1 = require("./auth.guards");
 const change_password_dto_1 = require("./dto/change-password.dto");
 const change_profile_dto_1 = require("./dto/change-profile.dto");
 const register_dto_1 = require("./dto/register.dto");
 const refresh_token_dto_1 = require("./dto/refresh-token.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const swagger_1 = require("@nestjs/swagger");
+const local_auth_guard_1 = require("./guards/local-auth.guard");
+const jwt_auth_guard_1 = require("./guards/jwt-auth.guard");
+const rt_auth_quard_1 = require("./guards/rt-auth.quard");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -61,7 +63,7 @@ let AuthController = class AuthController {
     }
 };
 __decorate([
-    (0, common_1.UseGuards)(auth_guards_1.LocalAuthGuard),
+    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
     (0, common_1.Post)('/login'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),
@@ -71,7 +73,7 @@ __decorate([
 ], AuthController.prototype, "login", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)(auth_guards_1.JwtAuthGuard),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('/profile'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
@@ -80,7 +82,7 @@ __decorate([
 ], AuthController.prototype, "profile", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)(auth_guards_1.RtGuard),
+    (0, common_1.UseGuards)(rt_auth_quard_1.RtAuthGuard),
     (0, common_1.Post)('/refresh-token'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),
@@ -91,7 +93,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
-    (0, common_1.UseGuards)(auth_guards_1.JwtAuthGuard),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Patch)('/profile'),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Body)()),
@@ -123,7 +125,7 @@ __decorate([
 ], AuthController.prototype, "register", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)(auth_guards_1.JwtAuthGuard),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('/change-password'),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Response)()),
@@ -133,7 +135,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "changePassword", null);
 AuthController = __decorate([
-    (0, swagger_1.ApiTags)('auth'),
+    (0, swagger_1.ApiTags)('Auth'),
     (0, common_1.Controller)('/auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);

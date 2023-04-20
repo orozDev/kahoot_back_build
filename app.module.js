@@ -20,6 +20,10 @@ const klass_module_1 = require("./klass/klass.module");
 const category_module_1 = require("./category/category.module");
 const admin_module_1 = require("./admin/admin.module");
 const nestjs_form_data_1 = require("nestjs-form-data");
+const question_module_1 = require("./question/question.module");
+const answer_module_1 = require("./answer/answer.module");
+const auth_module_1 = require("./auth/auth.module");
+const file_module_1 = require("./files/file.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -34,12 +38,16 @@ AppModule = __decorate([
             }),
             typeorm_1.TypeOrmModule.forRootAsync(typeorm_options_1.typeormOptions),
             nestjs_form_data_1.NestjsFormDataModule,
+            auth_module_1.AuthModule,
+            file_module_1.FileModule,
             user_module_1.UserModule,
             utils_module_1.UtilsModule,
+            question_module_1.QuestionModule,
             quiz_module_1.QuizModule,
             klass_module_1.KlassModule,
             category_module_1.CategoryModule,
             admin_module_1.AdminModule,
+            answer_module_1.AnswerModule,
         ],
     })
 ], AppModule);

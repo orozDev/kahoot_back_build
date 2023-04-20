@@ -18,10 +18,10 @@ const klass_service_1 = require("./klass.service");
 const create_klass_dto_1 = require("./dto/create-klass.dto");
 const update_klass_dto_1 = require("./dto/update-klass.dto");
 const swagger_1 = require("@nestjs/swagger");
-const roles_auth_decorator_1 = require("../auth/roles-auth.decorator");
 const user_roles_enum_1 = require("../user/user-roles.enum");
 const paginationQueryDto_1 = require("../utils/dto/paginationQueryDto");
-const auth_guards_1 = require("../auth/auth.guards");
+const role_auth_guard_1 = require("../auth/guards/role-auth.guard");
+const roles_auth_decorator_1 = require("../auth/decorators/roles-auth.decorator");
 let KlassController = class KlassController {
     constructor(klassService) {
         this.klassService = klassService;
@@ -45,7 +45,7 @@ let KlassController = class KlassController {
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -69,7 +69,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -80,7 +80,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -88,7 +88,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], KlassController.prototype, "remove", null);
 KlassController = __decorate([
-    (0, swagger_1.ApiTags)('klass'),
+    (0, swagger_1.ApiTags)('Klass'),
     (0, common_1.Controller)('/klasses'),
     __metadata("design:paramtypes", [klass_service_1.KlassService])
 ], KlassController);

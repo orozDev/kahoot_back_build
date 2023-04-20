@@ -34,7 +34,7 @@ let UtilsService = class UtilsService {
         });
         return data;
     }
-    pagianate(queryBuilder, limit = 20, offset = 1) {
+    paginate(queryBuilder, limit = 20, offset = 1) {
         const take = limit || 20;
         const page = offset || 1;
         const skip = (page - 1) * take;
@@ -51,6 +51,16 @@ let UtilsService = class UtilsService {
     async complexRequest(options) {
         var _a;
         const queryBuilder = await options.repository.createQueryBuilder(options.entity);
+        if (options.relations) {
+            for (const relation of options.relations) {
+                queryBuilder.leftJoinAndSelect(`${options.entity}.${relation.field}`, relation.entity);
+            }
+        }
+        if (options.relationFilterQuery) {
+            for (const relation of options.relationFilterQuery) {
+                queryBuilder.where(relation.query, relation.value);
+            }
+        }
         if (options.search) {
             for (const field of options.searchFields) {
                 queryBuilder.orWhere(`(user.${field} LIKE :search)`, {
@@ -67,7 +77,8 @@ let UtilsService = class UtilsService {
             const skip = (page - 1) * take;
             queryBuilder.take(take).skip(skip);
         }
-        queryBuilder.orderBy(options.orderBy || 'id', options.order || 'DESC');
+        const orderBy = options.orderBy || 'id';
+        queryBuilder.orderBy(options.entity + '.' + orderBy, options.order || 'DESC');
         const totalCount = await queryBuilder.getCount();
         const results = await queryBuilder.getMany();
         return {
@@ -77,6 +88,12 @@ let UtilsService = class UtilsService {
             totalPages: (_a = Math.ceil(totalCount / take)) !== null && _a !== void 0 ? _a : 0,
             data: this.includesUrl(results, options.includeStaticPrefix || []),
         };
+    }
+    async getObjectOr404(repository, options) {
+        const object = await repository.findOne(options);
+        if (!object)
+            throw new common_1.NotFoundException({ message: 'not found' });
+        return object;
     }
 };
 UtilsService = __decorate([

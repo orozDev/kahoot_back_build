@@ -49,7 +49,6 @@ let UserService = class UserService {
             orderBy,
             order,
             searchFields: ['first_name', 'last_name', 'email', 'phone'],
-            includeStaticPrefix: ['avatar'],
         });
     }
     async create(dto, avatar = null) {
@@ -68,12 +67,12 @@ let UserService = class UserService {
     async findOne(id) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user)
-            throw new common_1.NotFoundException({ message: 'UserEntity not found' });
-        return this.utils.includeUrl(user, ['avatar']);
+            throw new common_1.NotFoundException({ message: 'User not found' });
+        return user;
     }
     async remove(id) {
-        await this.findOne(id);
-        await this.userRepository.delete(id);
+        const user = await this.findOne(id);
+        await user.remove();
     }
     async update(id, dto, avatar = null) {
         const user = await this.userRepository.findOne({ where: { id } });
@@ -91,9 +90,27 @@ let UserService = class UserService {
         await this.userRepository.update({ id }, Object.assign(Object.assign({}, dto), temp));
         return await this.findOne(id);
     }
+    async findOneWithPassword(id) {
+        const user = await this.userRepository.findOne({
+            where: { id },
+            select: [
+                'username',
+                'password',
+                'id',
+                'role',
+                'avatar',
+                'phone',
+                'email',
+                'firstName',
+                'lastName',
+            ],
+        });
+        if (!user)
+            throw new common_1.NotFoundException({ message: 'User not found' });
+        return user;
+    }
     async getByUsernameWithPassword(username) {
-        let user = null;
-        user = await this.userRepository.findOne({
+        const user = await this.userRepository.findOne({
             where: { username },
             select: [
                 'username',
@@ -111,7 +128,7 @@ let UserService = class UserService {
             throw new common_1.NotFoundException({
                 message: ['Не существует пользователя или неверный пароль'],
             });
-        return this.utils.includeUrl(user, ['avatar']);
+        return user;
     }
 };
 UserService = __decorate([

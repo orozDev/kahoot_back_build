@@ -45,18 +45,9 @@ AdminModule = __decorate([
                             const repository = dataSource.getRepository('user');
                             const user = await repository.findOne({
                                 where: { username },
-                                select: [
-                                    'username',
-                                    'password',
-                                    'id',
-                                    'role',
-                                    'avatar',
-                                    'phone',
-                                    'email',
-                                    'firstName',
-                                    'lastName',
-                                ],
+                                select: ['password', 'email', 'role', 'username'],
                             });
+                            console.log(user);
                             if (!user)
                                 return null;
                             const passwordEquals = await bcryptjs.compare(password, user.password);

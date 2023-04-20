@@ -49,7 +49,14 @@ __decorate([
     __metadata("design:type", Array)
 ], CreateQuizDto.prototype, "klasses", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 30 }),
+    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], CreateQuizDto.prototype, "time", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ example: 1 }),
+    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
     (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
 ], CreateQuizDto.prototype, "user", void 0);

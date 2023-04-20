@@ -5,6 +5,7 @@ export declare class CreateQuizDto {
     image: MemoryStoredFile;
     categories: number[];
     klasses: number[];
+    time: number;
     user: number;
     isORT: boolean;
     isPublished: boolean;

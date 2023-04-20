@@ -19,6 +19,11 @@ const create_quiz_dto_1 = require("./dto/create-quiz.dto");
 const update_quiz_dto_1 = require("./dto/update-quiz.dto");
 const swagger_1 = require("@nestjs/swagger");
 const nestjs_form_data_1 = require("nestjs-form-data");
+const quiz_query_dto_1 = require("./dto/quiz-query.dto");
+const user_roles_enum_1 = require("../user/user-roles.enum");
+const quiz_owner_guard_1 = require("./guards/quiz-owner.guard");
+const roles_auth_decorator_1 = require("../auth/decorators/roles-auth.decorator");
+const role_auth_guard_1 = require("../auth/guards/role-auth.guard");
 let QuizController = class QuizController {
     constructor(quizService) {
         this.quizService = quizService;
@@ -26,8 +31,8 @@ let QuizController = class QuizController {
     create(createQuizDto) {
         return this.quizService.create(createQuizDto);
     }
-    findAll() {
-        return this.quizService.findAll();
+    findAll(query) {
+        return this.quizService.findAll(query);
     }
     findOne(id) {
         return this.quizService.findOne(+id);
@@ -40,6 +45,9 @@ let QuizController = class QuizController {
     }
 };
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Post)(),
     (0, nestjs_form_data_1.FormDataRequest)(),
     __param(0, (0, common_1.Body)()),
@@ -49,8 +57,9 @@ __decorate([
 ], QuizController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [quiz_query_dto_1.QuizQueryDto]),
     __metadata("design:returntype", void 0)
 ], QuizController.prototype, "findAll", null);
 __decorate([
@@ -61,6 +70,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], QuizController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(quiz_owner_guard_1.QuizOwnerGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -69,6 +82,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], QuizController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(quiz_owner_guard_1.QuizOwnerGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -76,7 +93,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], QuizController.prototype, "remove", null);
 QuizController = __decorate([
-    (0, swagger_1.ApiTags)('quizzers'),
+    (0, swagger_1.ApiTags)('Quiz'),
     (0, common_1.Controller)('/quizzers'),
     __metadata("design:paramtypes", [quiz_service_1.QuizService])
 ], QuizController);

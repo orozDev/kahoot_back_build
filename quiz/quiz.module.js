@@ -11,19 +11,31 @@ const common_1 = require("@nestjs/common");
 const quiz_service_1 = require("./quiz.service");
 const quiz_controller_1 = require("./quiz.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const quiz_entity_1 = require("./entities/quiz.entity");
-const question_entity_1 = require("./entities/question.entity");
-const answer_entity_1 = require("./entities/answer.entity");
+const question_entity_1 = require("../question/entities/question.entity");
 const nestjs_form_data_1 = require("nestjs-form-data");
 const file_module_1 = require("../files/file.module");
+const category_entity_1 = require("../category/entities/category.entity");
+const klass_entity_1 = require("../klass/entities/klass.entity");
+const user_entity_1 = require("../user/entities/user.entity");
+const utils_module_1 = require("../utils/utils.module");
+const quiz_entity_1 = require("./entities/quiz.entity");
+const auth_module_1 = require("../auth/auth.module");
 let QuizModule = class QuizModule {
 };
 QuizModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([quiz_entity_1.QuizEntity, question_entity_1.QuestionEntity, answer_entity_1.AnswerEntity]),
+            typeorm_1.TypeOrmModule.forFeature([
+                quiz_entity_1.QuizEntity,
+                question_entity_1.QuestionEntity,
+                category_entity_1.CategoryEntity,
+                klass_entity_1.KlassEntity,
+                user_entity_1.UserEntity,
+            ]),
             nestjs_form_data_1.NestjsFormDataModule,
             file_module_1.FileModule,
+            utils_module_1.UtilsModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [quiz_controller_1.QuizController],
         providers: [quiz_service_1.QuizService],

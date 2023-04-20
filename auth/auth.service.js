@@ -105,13 +105,10 @@ let AuthService = class AuthService {
     }
     async register(dto, avatar) {
         const user = await this.userService.create(Object.assign(Object.assign({}, dto), { isActive: true, role: user_roles_enum_1.UserRolesEnum.USER }), avatar);
-        const includedUrlUser = this.utitls.includeUrl(user, [
-            'avatar',
-        ]);
-        return this.login(includedUrlUser);
+        return this.login(user);
     }
     async changePassword(id, dto) {
-        const user = await this.userService.findOne(id);
+        const user = await this.userService.findOneWithPassword(id);
         if (!user) {
             return {
                 isChanged: false,

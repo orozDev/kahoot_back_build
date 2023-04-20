@@ -41,8 +41,8 @@ let CategoryService = class CategoryService {
         return await this.findOne(id);
     }
     async remove(id) {
-        await this.findOne(id);
-        await this.categoryRepository.delete({ id });
+        const category = await this.findOne(id);
+        await category.remove();
     }
 };
 CategoryService = __decorate([

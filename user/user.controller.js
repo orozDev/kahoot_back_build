@@ -16,14 +16,14 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const user_roles_enum_1 = require("./user-roles.enum");
-const auth_guards_1 = require("../auth/auth.guards");
-const roles_auth_decorator_1 = require("../auth/roles-auth.decorator");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const config_1 = require("@nestjs/config");
 const user_query_dto_1 = require("./dto/user-query.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const swagger_1 = require("@nestjs/swagger");
+const role_auth_guard_1 = require("../auth/guards/role-auth.guard");
+const roles_auth_decorator_1 = require("../auth/decorators/roles-auth.decorator");
 let UserController = class UserController {
     constructor(userService, config) {
         this.userService = userService;
@@ -37,6 +37,7 @@ let UserController = class UserController {
     }
     findOne(id) {
         const user = this.userService.findOne(+id);
+        console.log(user);
         if (!user)
             throw new common_1.NotFoundException({ message: 'User not found' });
         return user;
@@ -50,7 +51,7 @@ let UserController = class UserController {
 };
 __decorate([
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
@@ -60,7 +61,7 @@ __decorate([
 __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
@@ -76,7 +77,7 @@ __decorate([
 ], UserController.prototype, "create", null);
 __decorate([
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Get)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -86,7 +87,7 @@ __decorate([
 __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Patch)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -103,7 +104,7 @@ __decorate([
 ], UserController.prototype, "update", null);
 __decorate([
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
-    (0, common_1.UseGuards)(auth_guards_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
     (0, common_1.Delete)('/:id'),
     __param(0, (0, common_1.Param)('id')),
@@ -112,7 +113,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "remove", null);
 UserController = __decorate([
-    (0, swagger_1.ApiTags)('users'),
+    (0, swagger_1.ApiTags)('User'),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.Controller)('/users'),
     __metadata("design:paramtypes", [user_service_1.UserService,

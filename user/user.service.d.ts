@@ -18,5 +18,6 @@ export declare class UserService {
     findOne(id: number): Promise<UserEntity>;
     remove(id: number): Promise<void>;
     update(id: number, dto: UpdateUserDto, avatar?: Express.Multer.File): Promise<UserEntity>;
+    findOneWithPassword(id: number): Promise<UserEntity>;
     getByUsernameWithPassword(username: string): Promise<UserEntity>;
 }

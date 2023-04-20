@@ -1,4 +1,4 @@
-import { AnswerEntity } from '../../quiz/entities/answer.entity';
+import { AnswerEntity } from '../../answer/entities/answer.entity';
 export declare const answerAdminOptions: {
     resource: typeof AnswerEntity;
     options: {
