@@ -2,3 +2,4 @@ static
 migrations
 .env
 .DS_Store
+node_modules
