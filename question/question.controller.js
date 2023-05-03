@@ -48,7 +48,7 @@ __decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER),
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
-    (0, common_1.Post)('questions/'),
+    (0, common_1.Post)(),
     (0, nestjs_form_data_1.FormDataRequest)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -56,15 +56,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], QuestionController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)('questions/'),
-    (0, nestjs_form_data_1.FormDataRequest)(),
+    (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [question_query_dto_1.QuestionQueryDto]),
     __metadata("design:returntype", void 0)
 ], QuestionController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)('questions/:id'),
+    (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -75,7 +74,8 @@ __decorate([
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER),
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.UseGuards)(question_owner_guard_1.QuestionOwnerGuard),
-    (0, common_1.Patch)('questions/:id'),
+    (0, common_1.Patch)(':id'),
+    (0, nestjs_form_data_1.FormDataRequest)(),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -87,7 +87,7 @@ __decorate([
     (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER),
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.UseGuards)(question_owner_guard_1.QuestionOwnerGuard),
-    (0, common_1.Delete)('questions/:id'),
+    (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

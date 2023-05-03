@@ -5,6 +5,7 @@ export declare class QuestionEntity extends BaseEntity {
     title: string;
     content: string;
     image: string;
+    time: number;
     quiz: QuizEntity;
     quizId: number;
     answers: AnswerEntity[];

@@ -1,6 +1,7 @@
 import { UserRolesEnum } from '../user-roles.enum';
 import { BaseEntity } from '../../options/base-entity.options';
 import { QuizEntity } from '../../quiz/entities/quiz.entity';
+import { TestingEntity } from '../../testing/entities/testing.entity';
 export declare class UserEntity extends BaseEntity {
     avatar: string;
     username: string;
@@ -12,4 +13,5 @@ export declare class UserEntity extends BaseEntity {
     isActive: boolean;
     role: UserRolesEnum;
     quizzers: QuizEntity[];
+    completedTests: TestingEntity[];
 }

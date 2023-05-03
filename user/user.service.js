@@ -81,7 +81,7 @@ let UserService = class UserService {
         const temp = {};
         if (avatar) {
             if (user.avatar)
-                this.filesService.removeFile(user.avatar);
+                this.filesService.removeFile(user.avatar, false);
             temp['avatar'] = this.filesService.createFile('user_avatars', avatar);
         }
         if (dto.password) {

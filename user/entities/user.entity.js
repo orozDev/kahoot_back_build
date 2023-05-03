@@ -14,6 +14,7 @@ const user_roles_enum_1 = require("../user-roles.enum");
 const typeorm_1 = require("typeorm");
 const base_entity_options_1 = require("../../options/base-entity.options");
 const quiz_entity_1 = require("../../quiz/entities/quiz.entity");
+const testing_entity_1 = require("../../testing/entities/testing.entity");
 let UserEntity = class UserEntity extends base_entity_options_1.BaseEntity {
 };
 __decorate([
@@ -60,6 +61,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => quiz_entity_1.QuizEntity, (quiz) => quiz.user),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "quizzers", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => testing_entity_1.TestingEntity, (testing) => testing.owner),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "completedTests", void 0);
 UserEntity = __decorate([
     (0, typeorm_1.Entity)('user')
 ], UserEntity);

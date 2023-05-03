@@ -34,9 +34,9 @@ let FileService = class FileService {
             throw new common_1.HttpException(e.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    removeFile(fileName) {
+    removeFile(fileName, throwOnError = true) {
         const filePath = path.resolve(__dirname, '..', 'static', fileName);
-        if (!fs.existsSync(filePath)) {
+        if (!fs.existsSync(filePath) && throwOnError) {
             throw new common_1.HttpException({ message: `The file "${fileName}" does not exist` }, common_1.HttpStatus.BAD_REQUEST);
         }
         fs.rmSync(filePath);

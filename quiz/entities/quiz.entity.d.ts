@@ -10,7 +10,6 @@ export declare class QuizEntity extends BaseEntity {
     categories: CategoryEntity[];
     klasses: KlassEntity[];
     questions: QuestionEntity[];
-    time: number;
     questionIds: number[];
     user: UserEntity;
     isORT: boolean;

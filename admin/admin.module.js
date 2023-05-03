@@ -20,6 +20,7 @@ const klass_admin_1 = require("./resources/klass.admin");
 const category_admin_1 = require("./resources/category.admin");
 const question_admin_1 = require("./resources/question.admin");
 const typeorm_2 = require("@adminjs/typeorm");
+const post_admin_1 = require("./resources/post.admin");
 adminjs_1.default.registerAdapter({ Database: typeorm_2.Database, Resource: typeorm_2.Resource });
 let AdminModule = class AdminModule {
 };
@@ -38,6 +39,7 @@ AdminModule = __decorate([
                             klass_admin_1.klassAdminOptions,
                             category_admin_1.categoryAdminOptions,
                             question_admin_1.questionAdminOptions,
+                            post_admin_1.postAdminOptions,
                         ],
                     },
                     auth: {

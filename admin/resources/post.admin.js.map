@@ -1,0 +1,1 @@
+{"version":3,"file":"post.admin.js","sourceRoot":"","sources":["../../../src/admin/resources/post.admin.ts"],"names":[],"mappings":";;;AAAA,iEAA6D;AAEhD,QAAA,gBAAgB,GAAG;IAC9B,QAAQ,EAAE,wBAAU;IACpB,OAAO,EAAE;QACP,cAAc,EAAE,CAAC,IAAI,EAAE,OAAO,EAAE,aAAa,EAAE,WAAW,CAAC;KAC5D;CACF,CAAC"}

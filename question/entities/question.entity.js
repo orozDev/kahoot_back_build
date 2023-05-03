@@ -29,6 +29,10 @@ __decorate([
     __metadata("design:type", String)
 ], QuestionEntity.prototype, "image", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'int4', default: 30 }),
+    __metadata("design:type", Number)
+], QuestionEntity.prototype, "time", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => quiz_entity_1.QuizEntity, (quiz) => quiz.questions, {
         onDelete: 'CASCADE',
     }),

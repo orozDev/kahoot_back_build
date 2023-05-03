@@ -75,6 +75,7 @@ __decorate([
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.UseGuards)(quiz_owner_guard_1.QuizOwnerGuard),
     (0, common_1.Patch)(':id'),
+    (0, nestjs_form_data_1.FormDataRequest)(),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

@@ -137,7 +137,7 @@ let AuthService = class AuthService {
         const user = await this.userService.findOne(id);
         if (avatar) {
             if (user.avatar)
-                this.filesService.removeFile(user.avatar);
+                this.filesService.removeFile(user.avatar, false);
             const avatarPath = this.filesService.createFile('user_avatars', avatar);
             await this.userRepository.update({ id }, Object.assign(Object.assign({}, dto), { avatar: avatarPath }));
         }

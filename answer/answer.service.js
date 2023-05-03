@@ -76,7 +76,7 @@ let AnswerService = class AnswerService {
         const temp = {};
         if (image) {
             if (answer.image)
-                this.fileService.removeFile(answer.image);
+                this.fileService.removeFile(answer.image, false);
             temp['image'] = this.fileService.createFile('image', updateAnswerDto.image);
         }
         const updatedAnswer = await this.answerRepository.update({ id }, Object.assign(Object.assign({}, rest), temp));

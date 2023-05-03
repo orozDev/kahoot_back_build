@@ -75,6 +75,7 @@ let QuestionService = class QuestionService {
             order: order || 'ASC',
             orderBy: orderBy || 'order',
             filterQuery: temp,
+            relations: [{ field: 'answers', entity: 'answer' }],
         });
     }
     async findOne(id) {
@@ -109,7 +110,7 @@ let QuestionService = class QuestionService {
         }
         if (image) {
             if (question.image)
-                this.fileService.removeFile(question.image);
+                this.fileService.removeFile(question.image, false);
             temp['image'] = this.fileService.createFile('image', updateQuestionDto.image);
         }
         await this.questionRepository.update({ id }, Object.assign(Object.assign({}, rest), temp));

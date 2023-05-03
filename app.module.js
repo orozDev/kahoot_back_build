@@ -24,6 +24,8 @@ const question_module_1 = require("./question/question.module");
 const answer_module_1 = require("./answer/answer.module");
 const auth_module_1 = require("./auth/auth.module");
 const file_module_1 = require("./files/file.module");
+const testing_module_1 = require("./testing/testing.module");
+const post_module_1 = require("./post/post.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -48,6 +50,8 @@ AppModule = __decorate([
             category_module_1.CategoryModule,
             admin_module_1.AdminModule,
             answer_module_1.AnswerModule,
+            testing_module_1.TestingModule,
+            post_module_1.PostModule,
         ],
     })
 ], AppModule);

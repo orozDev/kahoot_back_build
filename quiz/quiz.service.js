@@ -111,7 +111,7 @@ let QuizService = class QuizService {
         }
         if (image) {
             if (quiz.image)
-                this.fileService.removeFile(quiz.image);
+                this.fileService.removeFile(quiz.image, false);
             temp['image'] = this.fileService.createFile('image', updateQuizDto.image);
         }
         await this.quizRepository.save(Object.assign(Object.assign(Object.assign({}, quiz), temp), rest));
