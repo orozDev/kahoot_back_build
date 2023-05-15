@@ -15,7 +15,7 @@ const base_entity_options_1 = require("../../options/base-entity.options");
 const quiz_entity_1 = require("../../quiz/entities/quiz.entity");
 const participant_entity_1 = require("./participant.entity");
 const user_entity_1 = require("../../user/entities/user.entity");
-const testing_status_enum_1 = require("../testing-status.enum");
+const testing_status_enum_1 = require("../enum/testing-status.enum");
 let TestingEntity = class TestingEntity extends base_entity_options_1.BaseEntity {
 };
 __decorate([

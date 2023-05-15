@@ -21,6 +21,7 @@ const typeorm_2 = require("typeorm");
 const testing_entity_1 = require("../entities/testing.entity");
 const utils_service_1 = require("../../utils/utils.service");
 const testing_gateway_1 = require("../testing.gateway");
+const testing_status_enum_1 = require("../enum/testing-status.enum");
 let ParticipantService = class ParticipantService {
     constructor(participantRepository, userRepository, testingRepository, utils, testingGateway) {
         this.participantRepository = participantRepository;
@@ -32,10 +33,16 @@ let ParticipantService = class ParticipantService {
     async create(createParticipantDto) {
         const { user, testing, name } = createParticipantDto;
         const participant = new participant_entity_1.ParticipantEntity();
+        const testingObject = await this.utils.getObjectOr404(this.testingRepository, { where: { id: testing } });
+        if (testingObject.status !== testing_status_enum_1.TestingStatusEnum.PENDING) {
+            throw new common_1.BadRequestException({
+                message: 'Testing status should be pending',
+            });
+        }
+        participant.testing = testingObject;
         if (user) {
             participant.user = await this.utils.getObjectOr404(this.userRepository, { where: { id: user } });
         }
-        participant.testing = await this.utils.getObjectOr404(this.testingRepository, { where: { id: testing } });
         participant.name = name;
         this.testingGateway.addNewParticipantToRoom(participant);
         return await this.participantRepository.save(participant);

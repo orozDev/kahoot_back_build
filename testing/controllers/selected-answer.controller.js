@@ -19,6 +19,7 @@ const selected_answer_service_1 = require("../services/selected-answer.service")
 const create_selected_answer_dto_1 = require("../dto/selected-answer/create-selected-answer.dto");
 const selected_query_dto_1 = require("../dto/selected-answer/selected-query.dto");
 const update_selected_answer_dto_1 = require("../dto/selected-answer/update-selected-answer.dto");
+const selected_answer_guard_1 = require("../guards/selected-answer.guard");
 let SelectedAnswerController = class SelectedAnswerController {
     constructor(selectedAnswerService) {
         this.selectedAnswerService = selectedAnswerService;
@@ -40,6 +41,8 @@ let SelectedAnswerController = class SelectedAnswerController {
     }
 };
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(selected_answer_guard_1.SelectedAnswerGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -61,6 +64,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SelectedAnswerController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(selected_answer_guard_1.SelectedAnswerGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -68,6 +73,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], SelectedAnswerController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(selected_answer_guard_1.SelectedAnswerGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

@@ -12,12 +12,12 @@ const nestjs_1 = require("@adminjs/nestjs");
 const adminjs_1 = require("adminjs");
 const typeorm_1 = require("typeorm");
 const bcryptjs = require("bcryptjs");
-const user_roles_enum_1 = require("../user/user-roles.enum");
+const user_roles_enum_1 = require("../user/enum/user-roles.enum");
 const user_admin_1 = require("./resources/user.admin");
 const quiz_admin_1 = require("./resources/quiz.admin");
 const answer_admin_1 = require("./resources/answer.admin");
 const klass_admin_1 = require("./resources/klass.admin");
-const category_admin_1 = require("./resources/category.admin");
+const subject_admin_1 = require("./resources/subject.admin");
 const question_admin_1 = require("./resources/question.admin");
 const typeorm_2 = require("@adminjs/typeorm");
 const post_admin_1 = require("./resources/post.admin");
@@ -37,7 +37,7 @@ AdminModule = __decorate([
                             quiz_admin_1.quizAdminOptions,
                             answer_admin_1.answerAdminOptions,
                             klass_admin_1.klassAdminOptions,
-                            category_admin_1.categoryAdminOptions,
+                            subject_admin_1.subjectAdminOptions,
                             question_admin_1.questionAdminOptions,
                             post_admin_1.postAdminOptions,
                         ],

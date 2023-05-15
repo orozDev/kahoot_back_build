@@ -35,7 +35,7 @@ const platform_express_1 = require("@nestjs/platform-express");
 const swagger_1 = require("@nestjs/swagger");
 const local_auth_guard_1 = require("./guards/local-auth.guard");
 const jwt_auth_guard_1 = require("./guards/jwt-auth.guard");
-const rt_auth_quard_1 = require("./guards/rt-auth.quard");
+const rt_auth_guard_1 = require("./guards/rt-auth.guard");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -82,7 +82,7 @@ __decorate([
 ], AuthController.prototype, "profile", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)(rt_auth_quard_1.RtAuthGuard),
+    (0, common_1.UseGuards)(rt_auth_guard_1.RtAuthGuard),
     (0, common_1.Post)('/refresh-token'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),

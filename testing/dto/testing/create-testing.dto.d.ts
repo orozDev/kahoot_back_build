@@ -1,4 +1,4 @@
-import { TestingStatusEnum } from '../../testing-status.enum';
+import { TestingStatusEnum } from '../../enum/testing-status.enum';
 export declare class CreateTestingDto {
     quiz: number;
     code: string;

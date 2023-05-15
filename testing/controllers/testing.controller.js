@@ -20,6 +20,10 @@ const update_testing_dto_1 = require("../dto/testing/update-testing.dto");
 const swagger_1 = require("@nestjs/swagger");
 const testing_query_dto_1 = require("../dto/testing/testing-query.dto");
 const testing_gateway_1 = require("../testing.gateway");
+const roles_auth_decorator_1 = require("../../auth/decorators/roles-auth.decorator");
+const user_roles_enum_1 = require("../../user/enum/user-roles.enum");
+const role_auth_guard_1 = require("../../auth/guards/role-auth.guard");
+const testing_owner_guard_1 = require("../guards/testing-owner.guard");
 let TestingController = class TestingController {
     constructor(testingService, testingGateway) {
         this.testingService = testingService;
@@ -34,6 +38,9 @@ let TestingController = class TestingController {
     findOne(id) {
         return this.testingService.findOne(+id);
     }
+    findOneByCode(code) {
+        return this.testingService.findOneByCode(code);
+    }
     update(id, updateTestingDto) {
         return this.testingService.update(+id, updateTestingDto);
     }
@@ -42,6 +49,9 @@ let TestingController = class TestingController {
     }
 };
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER, user_roles_enum_1.UserRolesEnum.MANAGER),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -63,6 +73,17 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TestingController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.Get)('/get-by-code/:code'),
+    __param(0, (0, common_1.Param)('code')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TestingController.prototype, "findOneByCode", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER, user_roles_enum_1.UserRolesEnum.MANAGER),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(testing_owner_guard_1.TestingOwnerGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -71,6 +92,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], TestingController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.TEACHER, user_roles_enum_1.UserRolesEnum.MANAGER),
+    (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
+    (0, common_1.UseGuards)(testing_owner_guard_1.TestingOwnerGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

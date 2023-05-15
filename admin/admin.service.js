@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
-const user_roles_enum_1 = require("../user/user-roles.enum");
+const user_roles_enum_1 = require("../user/enum/user-roles.enum");
 const bcryptjs = require("bcryptjs");
 let AdminService = class AdminService {
     constructor(dataSource) {

@@ -15,7 +15,7 @@ const class_transformer_1 = require("class-transformer");
 const unique_validator_1 = require("../../../validators/unique.validator");
 const testing_entity_1 = require("../../entities/testing.entity");
 const swagger_1 = require("@nestjs/swagger");
-const testing_status_enum_1 = require("../../testing-status.enum");
+const testing_status_enum_1 = require("../../enum/testing-status.enum");
 class CreateTestingDto {
 }
 __decorate([

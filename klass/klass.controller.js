@@ -18,10 +18,10 @@ const klass_service_1 = require("./klass.service");
 const create_klass_dto_1 = require("./dto/create-klass.dto");
 const update_klass_dto_1 = require("./dto/update-klass.dto");
 const swagger_1 = require("@nestjs/swagger");
-const user_roles_enum_1 = require("../user/user-roles.enum");
-const paginationQueryDto_1 = require("../utils/dto/paginationQueryDto");
+const user_roles_enum_1 = require("../user/enum/user-roles.enum");
 const role_auth_guard_1 = require("../auth/guards/role-auth.guard");
 const roles_auth_decorator_1 = require("../auth/decorators/roles-auth.decorator");
+const klass_query_dto_1 = require("./dto/klass-query.dto");
 let KlassController = class KlassController {
     constructor(klassService) {
         this.klassService = klassService;
@@ -44,7 +44,7 @@ let KlassController = class KlassController {
 };
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.MANAGER),
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
@@ -56,7 +56,7 @@ __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [paginationQueryDto_1.PaginationQueryDto]),
+    __metadata("design:paramtypes", [klass_query_dto_1.KlassQueryDto]),
     __metadata("design:returntype", void 0)
 ], KlassController.prototype, "findAll", null);
 __decorate([
@@ -68,7 +68,7 @@ __decorate([
 ], KlassController.prototype, "findOne", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.MANAGER),
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -79,7 +79,7 @@ __decorate([
 ], KlassController.prototype, "update", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
-    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN),
+    (0, roles_auth_decorator_1.Roles)(user_roles_enum_1.UserRolesEnum.ADMIN, user_roles_enum_1.UserRolesEnum.MANAGER),
     (0, common_1.UseGuards)(role_auth_guard_1.RoleAuthGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),

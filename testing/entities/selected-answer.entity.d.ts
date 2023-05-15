@@ -1,7 +1,7 @@
 import { BaseEntity } from '../../options/base-entity.options';
 import { ParticipantEntity } from './participant.entity';
-import { AnswerEntity } from '../../answer/entities/answer.entity';
-import { QuestionEntity } from '../../question/entities/question.entity';
+import { AnswerEntity } from '../../quiz/entities/answer.entity';
+import { QuestionEntity } from '../../quiz/entities/question.entity';
 export declare class SelectedAnswerEntity extends BaseEntity {
     participant: ParticipantEntity;
     question: QuestionEntity;

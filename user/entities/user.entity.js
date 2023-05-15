@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserEntity = void 0;
-const user_roles_enum_1 = require("../user-roles.enum");
+const user_roles_enum_1 = require("../enum/user-roles.enum");
 const typeorm_1 = require("typeorm");
 const base_entity_options_1 = require("../../options/base-entity.options");
-const quiz_entity_1 = require("../../quiz/entities/quiz.entity");
 const testing_entity_1 = require("../../testing/entities/testing.entity");
+const student_entity_1 = require("./student.entity");
+const teacher_entity_1 = require("./teacher.entity");
+const quiz_entity_1 = require("../../quiz/entities/quiz.entity");
 let UserEntity = class UserEntity extends base_entity_options_1.BaseEntity {
 };
 __decorate([
@@ -57,6 +59,22 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], UserEntity.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => student_entity_1.StudentEntity, (student) => student.user, {
+        onDelete: 'SET NULL',
+        nullable: true,
+        eager: true,
+    }),
+    __metadata("design:type", student_entity_1.StudentEntity)
+], UserEntity.prototype, "student", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => teacher_entity_1.TeacherEntity, (teacher) => teacher.user, {
+        onDelete: 'SET NULL',
+        nullable: true,
+        eager: true,
+    }),
+    __metadata("design:type", teacher_entity_1.TeacherEntity)
+], UserEntity.prototype, "teacher", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => quiz_entity_1.QuizEntity, (quiz) => quiz.user),
     __metadata("design:type", Array)

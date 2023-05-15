@@ -17,15 +17,15 @@ const utils_module_1 = require("./utils/utils.module");
 const typeorm_options_1 = require("./options/typeorm.options");
 const quiz_module_1 = require("./quiz/quiz.module");
 const klass_module_1 = require("./klass/klass.module");
-const category_module_1 = require("./category/category.module");
+const subject_module_1 = require("./subject/subject.module");
 const admin_module_1 = require("./admin/admin.module");
 const nestjs_form_data_1 = require("nestjs-form-data");
-const question_module_1 = require("./question/question.module");
-const answer_module_1 = require("./answer/answer.module");
 const auth_module_1 = require("./auth/auth.module");
 const file_module_1 = require("./files/file.module");
 const testing_module_1 = require("./testing/testing.module");
 const post_module_1 = require("./post/post.module");
+const school_module_1 = require("./school/school.module");
+const city_module_1 = require("./city/city.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -44,14 +44,14 @@ AppModule = __decorate([
             file_module_1.FileModule,
             user_module_1.UserModule,
             utils_module_1.UtilsModule,
-            question_module_1.QuestionModule,
             quiz_module_1.QuizModule,
             klass_module_1.KlassModule,
-            category_module_1.CategoryModule,
+            subject_module_1.SubjectModule,
             admin_module_1.AdminModule,
-            answer_module_1.AnswerModule,
             testing_module_1.TestingModule,
             post_module_1.PostModule,
+            school_module_1.SchoolModule,
+            city_module_1.CityModule,
         ],
     })
 ], AppModule);

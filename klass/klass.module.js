@@ -14,11 +14,16 @@ const typeorm_1 = require("@nestjs/typeorm");
 const klass_entity_1 = require("./entities/klass.entity");
 const auth_module_1 = require("../auth/auth.module");
 const utils_module_1 = require("../utils/utils.module");
+const school_entity_1 = require("../school/entities/school.entity");
 let KlassModule = class KlassModule {
 };
 KlassModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([klass_entity_1.KlassEntity]), auth_module_1.AuthModule, utils_module_1.UtilsModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([klass_entity_1.KlassEntity, school_entity_1.SchoolEntity]),
+            auth_module_1.AuthModule,
+            utils_module_1.UtilsModule,
+        ],
         controllers: [klass_controller_1.KlassController],
         providers: [klass_service_1.KlassService],
     })

@@ -19,6 +19,7 @@ const create_participant_dto_1 = require("../dto/participant/create-participant.
 const participant_query_dto_1 = require("../dto/participant/participant-query.dto");
 const update_participant_dto_1 = require("../dto/participant/update-participant.dto");
 const swagger_1 = require("@nestjs/swagger");
+const participant_guard_1 = require("../guards/participant.guard");
 let ParticipantController = class ParticipantController {
     constructor(participantService) {
         this.participantService = participantService;
@@ -61,6 +62,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ParticipantController.prototype, "findOne", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(participant_guard_1.ParticipantGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -69,6 +72,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ParticipantController.prototype, "update", null);
 __decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(participant_guard_1.ParticipantGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

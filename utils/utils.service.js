@@ -62,6 +62,7 @@ let UtilsService = class UtilsService {
             }
         }
         if (options.search) {
+            console.log(options.search, options.searchFields);
             for (const field of options.searchFields) {
                 queryBuilder.orWhere(`(user.${field} LIKE :search)`, {
                     search: `%${options.search}%`,

@@ -10,6 +10,7 @@ export declare class TestingController {
     create(createTestingDto: CreateTestingDto): Promise<import("../entities/testing.entity").TestingEntity>;
     findAll(query: TestingQueryDto): Promise<import("../../utils/interfaces/complex-request.interface").IComplexRequest<import("../entities/testing.entity").TestingEntity[]>>;
     findOne(id: string): Promise<import("../entities/testing.entity").TestingEntity>;
+    findOneByCode(code: string): Promise<import("../entities/testing.entity").TestingEntity>;
     update(id: string, updateTestingDto: UpdateTestingDto): Promise<import("../entities/testing.entity").TestingEntity>;
     remove(id: string): Promise<void>;
 }

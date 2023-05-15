@@ -36,5 +36,19 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ParticipantQueryDto.prototype, "search", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
+    __metadata("design:type", Number)
+], ParticipantQueryDto.prototype, "subject", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
+    __metadata("design:type", Number)
+], ParticipantQueryDto.prototype, "klass", void 0);
 exports.ParticipantQueryDto = ParticipantQueryDto;
 //# sourceMappingURL=participant-query.dto.js.map

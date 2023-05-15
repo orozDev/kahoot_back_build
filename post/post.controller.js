@@ -21,7 +21,7 @@ const swagger_1 = require("@nestjs/swagger");
 const nestjs_form_data_1 = require("nestjs-form-data");
 const post_query_dto_1 = require("./post-query.dto");
 const roles_auth_decorator_1 = require("../auth/decorators/roles-auth.decorator");
-const user_roles_enum_1 = require("../user/user-roles.enum");
+const user_roles_enum_1 = require("../user/enum/user-roles.enum");
 const role_auth_guard_1 = require("../auth/guards/role-auth.guard");
 let PostController = class PostController {
     constructor(postService) {

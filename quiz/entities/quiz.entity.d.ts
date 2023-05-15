@@ -1,13 +1,13 @@
 import { BaseEntity } from '../../options/base-entity.options';
-import { CategoryEntity } from '../../category/entities/category.entity';
+import { SubjectEntity } from '../../subject/entities/subject.entity';
 import { KlassEntity } from '../../klass/entities/klass.entity';
-import { QuestionEntity } from '../../question/entities/question.entity';
+import { QuestionEntity } from './question.entity';
 import { UserEntity } from '../../user/entities/user.entity';
 export declare class QuizEntity extends BaseEntity {
     title: string;
     description: string;
     image: string;
-    categories: CategoryEntity[];
+    subjects: SubjectEntity[];
     klasses: KlassEntity[];
     questions: QuestionEntity[];
     questionIds: number[];

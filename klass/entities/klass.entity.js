@@ -13,12 +13,20 @@ exports.KlassEntity = void 0;
 const base_entity_options_1 = require("../../options/base-entity.options");
 const typeorm_1 = require("typeorm");
 const quiz_entity_1 = require("../../quiz/entities/quiz.entity");
+const school_entity_1 = require("../../school/entities/school.entity");
 let KlassEntity = class KlassEntity extends base_entity_options_1.BaseEntity {
 };
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], KlassEntity.prototype, "title", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => school_entity_1.SchoolEntity, (school) => school.klasses, {
+        onDelete: 'CASCADE',
+    }),
+    (0, typeorm_1.JoinColumn)({ name: 'school_id' }),
+    __metadata("design:type", school_entity_1.SchoolEntity)
+], KlassEntity.prototype, "school", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => quiz_entity_1.QuizEntity, (quiz) => quiz.klasses),
     __metadata("design:type", Array)

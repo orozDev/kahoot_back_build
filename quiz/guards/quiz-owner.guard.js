@@ -14,9 +14,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizOwnerGuard = void 0;
 const common_1 = require("@nestjs/common");
-const quiz_service_1 = require("../quiz.service");
+const quiz_service_1 = require("../services/quiz.service");
 const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
-const user_roles_enum_1 = require("../../user/user-roles.enum");
+const user_roles_enum_1 = require("../../user/enum/user-roles.enum");
 let QuizOwnerGuard = class QuizOwnerGuard extends jwt_auth_guard_1.JwtAuthGuard {
     constructor(quizService) {
         super();
@@ -28,9 +28,11 @@ let QuizOwnerGuard = class QuizOwnerGuard extends jwt_auth_guard_1.JwtAuthGuard 
             return false;
         }
         const req = context.switchToHttp().getRequest();
-        const quiz_id = +req._parsedUrl.pathname.split('/').at(-1);
-        const quiz = await this.quizService.findOne(quiz_id);
-        return ((quiz === null || quiz === void 0 ? void 0 : quiz.user.id) === req.user.id || req.user.role === user_roles_enum_1.UserRolesEnum.ADMIN);
+        const quizId = +req._parsedUrl.pathname.split('/').at(-1);
+        const quiz = await this.quizService.findOne(quizId);
+        if (quiz.isORT && req.user.role === user_roles_enum_1.UserRolesEnum.MANAGER)
+            return true;
+        return (quiz.user.id === req.user.id || req.user.role === user_roles_enum_1.UserRolesEnum.ADMIN);
     }
 };
 QuizOwnerGuard = __decorate([

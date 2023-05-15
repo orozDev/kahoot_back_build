@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { ChangeProfileDto } from './dto/change-profile.dto';
 import { RegisterDto } from './dto/register.dto';
 import { UserEntity } from '../user/entities/user.entity';
-import { UserService } from '../user/user.service';
+import { UserService } from '../user/services/user.service';
 import { IAccessTokenPayload, IFullToken } from './interfaces/token.interface';
 import { ConfigService } from '@nestjs/config';
 import { FileService } from '../files/file.service';

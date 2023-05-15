@@ -14,7 +14,7 @@ const paginationQueryDto_1 = require("../../../utils/dto/paginationQueryDto");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const testing_status_enum_1 = require("../../testing-status.enum");
+const testing_status_enum_1 = require("../../enum/testing-status.enum");
 class TestingQueryDto extends paginationQueryDto_1.PaginationQueryDto {
 }
 __decorate([

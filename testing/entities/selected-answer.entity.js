@@ -13,8 +13,8 @@ exports.SelectedAnswerEntity = void 0;
 const typeorm_1 = require("typeorm");
 const base_entity_options_1 = require("../../options/base-entity.options");
 const participant_entity_1 = require("./participant.entity");
-const answer_entity_1 = require("../../answer/entities/answer.entity");
-const question_entity_1 = require("../../question/entities/question.entity");
+const answer_entity_1 = require("../../quiz/entities/answer.entity");
+const question_entity_1 = require("../../quiz/entities/question.entity");
 let SelectedAnswerEntity = class SelectedAnswerEntity extends base_entity_options_1.BaseEntity {
 };
 __decorate([

@@ -19,8 +19,8 @@ const typeorm_1 = require("@nestjs/typeorm");
 const selected_answer_entity_1 = require("../entities/selected-answer.entity");
 const typeorm_2 = require("typeorm");
 const participant_entity_1 = require("../entities/participant.entity");
-const question_entity_1 = require("../../question/entities/question.entity");
-const answer_entity_1 = require("../../answer/entities/answer.entity");
+const question_entity_1 = require("../../quiz/entities/question.entity");
+const answer_entity_1 = require("../../quiz/entities/answer.entity");
 let SelectedAnswerService = class SelectedAnswerService {
     constructor(utils, selectedAnswerRepository, participantRepository, questionRepository, answerRepository) {
         this.utils = utils;

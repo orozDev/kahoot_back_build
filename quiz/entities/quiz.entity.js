@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuizEntity = void 0;
 const base_entity_options_1 = require("../../options/base-entity.options");
 const typeorm_1 = require("typeorm");
-const category_entity_1 = require("../../category/entities/category.entity");
+const subject_entity_1 = require("../../subject/entities/subject.entity");
 const klass_entity_1 = require("../../klass/entities/klass.entity");
-const question_entity_1 = require("../../question/entities/question.entity");
+const question_entity_1 = require("./question.entity");
 const user_entity_1 = require("../../user/entities/user.entity");
 let QuizEntity = class QuizEntity extends base_entity_options_1.BaseEntity {
 };
@@ -31,12 +31,12 @@ __decorate([
     __metadata("design:type", String)
 ], QuizEntity.prototype, "image", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => category_entity_1.CategoryEntity, (category) => category.quizzers, {
+    (0, typeorm_1.ManyToMany)(() => subject_entity_1.SubjectEntity, (subject) => subject.quizzers, {
         eager: true,
     }),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
-], QuizEntity.prototype, "categories", void 0);
+], QuizEntity.prototype, "subjects", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => klass_entity_1.KlassEntity, (klass) => klass.quizzers, {
         nullable: true,
@@ -54,7 +54,10 @@ __decorate([
     __metadata("design:type", Array)
 ], QuizEntity.prototype, "questionIds", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.quizzers, { eager: true }),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, (user) => user.quizzers, {
+        eager: true,
+        nullable: true,
+    }),
     (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
     __metadata("design:type", user_entity_1.UserEntity)
 ], QuizEntity.prototype, "user", void 0);

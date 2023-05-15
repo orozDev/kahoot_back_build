@@ -85,6 +85,15 @@ let TestingService = class TestingService {
             throw new common_1.NotFoundException({ message: 'Testing not found' });
         return testing;
     }
+    async findOneByCode(code) {
+        const testing = await this.testingRepository.findOne({
+            where: { code },
+            relations: ['participants', 'owner'],
+        });
+        if (!testing)
+            throw new common_1.NotFoundException({ message: 'Testing not found' });
+        return testing;
+    }
     async update(id, updateTestingDto) {
         const testing = await this.testingRepository.findOneBy({ id });
         if (!testing)

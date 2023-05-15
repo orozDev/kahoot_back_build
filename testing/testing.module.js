@@ -22,8 +22,8 @@ const participant_controller_1 = require("./controllers/participant.controller")
 const participant_service_1 = require("./services/participant.service");
 const selected_answer_controller_1 = require("./controllers/selected-answer.controller");
 const selected_answer_service_1 = require("./services/selected-answer.service");
-const question_entity_1 = require("../question/entities/question.entity");
-const answer_entity_1 = require("../answer/entities/answer.entity");
+const question_entity_1 = require("../quiz/entities/question.entity");
+const answer_entity_1 = require("../quiz/entities/answer.entity");
 let TestingModule = class TestingModule {
 };
 TestingModule = __decorate([

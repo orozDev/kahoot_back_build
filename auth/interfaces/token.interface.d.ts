@@ -1,4 +1,4 @@
-import { UserRolesEnum } from '../../user/user-roles.enum';
+import { UserRolesEnum } from '../../user/enum/user-roles.enum';
 interface IAccessTokenPayload {
     username: string;
     sub: number | string;
