@@ -14,23 +14,26 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ParticipantGuard = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../../auth/guards/jwt-auth.guard");
 const participant_service_1 = require("../services/participant.service");
 const user_roles_enum_1 = require("../../user/enum/user-roles.enum");
-let ParticipantGuard = class ParticipantGuard extends jwt_auth_guard_1.JwtAuthGuard {
-    constructor(participantService) {
+const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
+const abstract_jwt_auth_guard_1 = require("./abstract-jwt-auth.guard");
+let ParticipantGuard = class ParticipantGuard extends abstract_jwt_auth_guard_1.AbstractJwtAuthGuard {
+    constructor(participantService, jwtService, config) {
         super();
         this.participantService = participantService;
+        this.jwtService = jwtService;
+        this.config = config;
     }
     async canActivate(context) {
-        var _a, _b;
-        await super.canActivate(context);
         const request = context.switchToHttp().getRequest();
+        const user = this.decodeUser(request, this.jwtService, this.config.get('ACCESS_SECRET_KEY'));
         const participantId = +request._parsedUrl.pathname.split('/').at(-1);
         const participant = await this.participantService.findOne(participantId);
-        if (request.user &&
-            request.user.id !== ((_a = participant.user) === null || _a === void 0 ? void 0 : _a.id) &&
-            ((_b = request.user) === null || _b === void 0 ? void 0 : _b.role) !== user_roles_enum_1.UserRolesEnum.ADMIN) {
+        if (participant.user &&
+            (user === null || user === void 0 ? void 0 : user.sub) !== participant.user.id &&
+            (user === null || user === void 0 ? void 0 : user.role) !== user_roles_enum_1.UserRolesEnum.ADMIN) {
             throw new common_1.ForbiddenException({
                 message: 'User is not owner of this participant',
             });
@@ -40,7 +43,9 @@ let ParticipantGuard = class ParticipantGuard extends jwt_auth_guard_1.JwtAuthGu
 };
 ParticipantGuard = __decorate([
     __param(0, (0, common_1.Inject)(participant_service_1.ParticipantService)),
-    __metadata("design:paramtypes", [participant_service_1.ParticipantService])
+    __metadata("design:paramtypes", [participant_service_1.ParticipantService,
+        jwt_1.JwtService,
+        config_1.ConfigService])
 ], ParticipantGuard);
 exports.ParticipantGuard = ParticipantGuard;
 //# sourceMappingURL=participant.guard.js.map

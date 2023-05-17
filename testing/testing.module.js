@@ -24,12 +24,16 @@ const selected_answer_controller_1 = require("./controllers/selected-answer.cont
 const selected_answer_service_1 = require("./services/selected-answer.service");
 const question_entity_1 = require("../quiz/entities/question.entity");
 const answer_entity_1 = require("../quiz/entities/answer.entity");
+const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
 let TestingModule = class TestingModule {
 };
 TestingModule = __decorate([
     (0, common_1.Module)({
         imports: [
             utils_module_1.UtilsModule,
+            jwt_1.JwtModule,
+            config_1.ConfigModule,
             typeorm_1.TypeOrmModule.forFeature([
                 testing_entity_1.TestingEntity,
                 participant_entity_1.ParticipantEntity,
