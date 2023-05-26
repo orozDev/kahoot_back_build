@@ -18,7 +18,7 @@ export declare class TestingService {
     create(createTestingDto: CreateTestingDto): Promise<TestingEntity>;
     findAll(query: TestingQueryDto): Promise<IComplexRequest<TestingEntity[]>>;
     findOne(id: number): Promise<TestingEntity>;
-    findOneByCode(code: number): Promise<TestingEntity>;
+    findOneByCode(code: string): Promise<TestingEntity>;
     update(id: number, updateTestingDto: UpdateTestingDto): Promise<TestingEntity>;
     remove(id: number): Promise<void>;
     private makeCode;

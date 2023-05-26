@@ -7,7 +7,7 @@ export declare class TestingEntity extends BaseEntity {
     quiz: QuizEntity;
     quizId: number;
     participants: ParticipantEntity[];
-    code: number;
+    code: string;
     status: TestingStatusEnum;
     owner: UserEntity;
 }

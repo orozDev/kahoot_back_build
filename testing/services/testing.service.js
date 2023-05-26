@@ -117,7 +117,7 @@ let TestingService = class TestingService {
         await testing.remove();
     }
     makeCode() {
-        return Math.floor(Math.random() * 100000000);
+        return String(Math.floor(Math.random() * 100000000));
     }
 };
 TestingService = __decorate([
