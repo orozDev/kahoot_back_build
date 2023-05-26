@@ -39,7 +39,7 @@ let TestingController = class TestingController {
         return this.testingService.findOne(+id);
     }
     findOneByCode(code) {
-        return this.testingService.findOneByCode(code);
+        return this.testingService.findOneByCode(+code);
     }
     update(id, updateTestingDto) {
         return this.testingService.update(+id, updateTestingDto);

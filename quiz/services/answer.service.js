@@ -85,6 +85,8 @@ let AnswerService = class AnswerService {
     }
     async remove(id) {
         const answer = await this.findOne(id);
+        if (answer.image)
+            this.fileService.removeFile(answer.image, false);
         await answer.remove();
     }
 };

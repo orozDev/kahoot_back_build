@@ -9,10 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileModule = void 0;
 const common_1 = require("@nestjs/common");
 const file_service_1 = require("./file.service");
+const config_1 = require("@nestjs/config");
 let FileModule = class FileModule {
 };
 FileModule = __decorate([
     (0, common_1.Module)({
+        imports: [config_1.ConfigModule],
         providers: [file_service_1.FileService],
         exports: [file_service_1.FileService],
     })

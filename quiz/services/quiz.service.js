@@ -149,6 +149,8 @@ let QuizService = class QuizService {
         const quiz = await this.quizRepository.findOneBy({ id });
         if (!quiz)
             throw new common_1.NotFoundException({ message: 'Quiz not found' });
+        if (quiz.image)
+            this.fileService.removeFile(quiz.image, false);
         await quiz.remove();
     }
 };

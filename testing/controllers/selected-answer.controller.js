@@ -41,8 +41,6 @@ let SelectedAnswerController = class SelectedAnswerController {
     }
 };
 __decorate([
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.UseGuards)(selected_answer_guard_1.SelectedAnswerGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

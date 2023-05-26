@@ -86,6 +86,8 @@ let PostService = class PostService {
     }
     async remove(id) {
         const post = await this.findOne(id);
+        if (post.image)
+            this.fileService.removeFile(post.image);
         await post.remove();
     }
 };

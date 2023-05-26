@@ -96,6 +96,8 @@ let QuestionService = class QuestionService {
         if (!question) {
             throw new common_1.NotFoundException({ message: 'Question not found' });
         }
+        if (question.image)
+            this.fileService.removeFile(question.image, false);
         await question.remove();
     }
     async update(id, updateQuestionDto) {

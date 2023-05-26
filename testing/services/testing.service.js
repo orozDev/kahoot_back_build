@@ -45,7 +45,7 @@ let TestingService = class TestingService {
         const temp = {};
         temp['quiz'] = await this.utils.getObjectOr404(this.quizRepository, { where: { id: quiz } });
         temp['owner'] = await this.utils.getObjectOr404(this.userRepository, { where: { id: owner } });
-        const testing = this.testingRepository.create(Object.assign(Object.assign({}, rest), temp));
+        const testing = this.testingRepository.create(Object.assign(Object.assign(Object.assign({}, rest), temp), { code: this.makeCode() }));
         return await this.testingRepository.save(testing);
     }
     async findAll(query) {
@@ -115,6 +115,9 @@ let TestingService = class TestingService {
         if (!testing)
             throw new common_1.NotFoundException({ message: 'Testing not found' });
         await testing.remove();
+    }
+    makeCode() {
+        return Math.floor(Math.random() * 100000000);
     }
 };
 TestingService = __decorate([

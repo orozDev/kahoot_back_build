@@ -72,6 +72,8 @@ let UserService = class UserService {
     }
     async remove(id) {
         const user = await this.findOne(id);
+        if (user.avatar)
+            this.filesService.removeFile(user.avatar, false);
         await user.remove();
     }
     async update(id, dto, avatar = null) {

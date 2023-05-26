@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateTestingDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
-const unique_validator_1 = require("../../../validators/unique.validator");
-const testing_entity_1 = require("../../entities/testing.entity");
 const swagger_1 = require("@nestjs/swagger");
 const testing_status_enum_1 = require("../../enum/testing-status.enum");
 class CreateTestingDto {
@@ -24,14 +22,6 @@ __decorate([
     (0, class_transformer_1.Transform)(({ obj, key }) => Number(obj[key])),
     __metadata("design:type", Number)
 ], CreateTestingDto.prototype, "quiz", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: '213124' }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.Validate)(unique_validator_1.UniqueValidator, [{ table: testing_entity_1.TestingEntity, column: 'code' }], {
-        message: 'Этот код уже занят',
-    }),
-    __metadata("design:type", String)
-], CreateTestingDto.prototype, "code", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         enum: testing_status_enum_1.TestingStatusEnum,

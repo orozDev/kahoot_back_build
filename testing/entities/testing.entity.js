@@ -33,7 +33,7 @@ __decorate([
 ], TestingEntity.prototype, "participants", void 0);
 __decorate([
     (0, typeorm_1.Column)({ unique: true }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], TestingEntity.prototype, "code", void 0);
 __decorate([
     (0, typeorm_1.Column)({

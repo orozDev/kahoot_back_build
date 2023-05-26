@@ -28,6 +28,7 @@ async function bootstrap() {
     app.useGlobalFilters(new catch_error_options_1.QueryErrorFilter(httpAdapter));
     app.enableCors();
     const PORT = config.get('PORT') || 8000;
+    console.log(config.get('PORT'));
     await app.listen(PORT, () => console.log(`The server has been started on ${PORT} port`));
 }
 bootstrap();

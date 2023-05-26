@@ -24,12 +24,6 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateTestingDto.prototype, "quiz", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: '213124' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateTestingDto.prototype, "code", void 0);
-__decorate([
     (0, swagger_1.ApiProperty)({
         enum: testing_status_enum_1.TestingStatusEnum,
         required: false,
